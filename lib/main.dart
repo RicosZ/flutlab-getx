@@ -1,41 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+// import 'package:getx_1/services/cookie.services.dart';
+import 'package:getx_1/views/add_topic.view.dart';
+import 'package:getx_1/views/category.view.dart';
+import 'package:getx_1/views/fetch_topic.view.dart';
+// import 'package:getx_1/views/home.view.dart';
+import 'package:getx_1/views/login.view.dart';
+import 'package:getx_1/views/topic.view.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+void main() async {
+  runApp(MyApp());
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'GetX',
+      theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
-        ),
-      ),
+      home: LoginView(),
+      getPages: [
+        GetPage(name: '/login', page: () => LoginView()),
+        GetPage(name: '/category', page: () => CategoryPage()),
+        GetPage(name: '/topic', page: () => FecthTTopicView()),
+        GetPage(name: '/topic/add', page: () => addTopicView()),
+        GetPage(name: '/topic/:slugid', page: () => TopicView()),
+      ],
+
+      // home: HomePage(),
     );
   }
 }
